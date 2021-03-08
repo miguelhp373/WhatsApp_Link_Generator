@@ -38,7 +38,7 @@
 
 # 📝 License
 
-Este projeto está licenciado sob a Licença MIT - consulte o arquivo [LICENÇA](LICENSE) para obter detalhes.
+Este projeto está licenciado sob a Licença GPL-3.0 License - consulte o arquivo [LICENÇA](LICENSE) para obter detalhes.
 
 ***
 
