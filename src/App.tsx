@@ -76,7 +76,7 @@ function App() {
       let phoneNumber = localStorage.getItem('phoneNumber')
       let message = localStorage.getItem('messageField')
       let LinkApi = 'wa.me/';
-      let LinkGerated = `${LinkApi}55${codNumber}${phoneNumber}?text=${message}`;
+      let LinkGerated = `${LinkApi}55${codNumber}${phoneNumber}?text=${message}&app_absent=0`;
       localStorage.setItem('link', LinkGerated)
       setOpenModal(true)
       setLink(LinkGerated)
