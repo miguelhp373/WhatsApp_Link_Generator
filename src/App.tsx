@@ -84,10 +84,10 @@ function App() {
     setOpenModal(false)
   }
 
- function CopyLink(){
+/*  function CopyLink(){
   var setLink = {(<HTMLInputElement>)document.getElementById('linkCopy').value} //parei aqui
     
-} 
+}  */
 
 
 
@@ -163,7 +163,7 @@ function App() {
                     <input type="text" id='linkCopy' className={ModalStyles.linkField} />
                    
                     <button
-                       onClick={CopyLink}
+                       /* onClick={CopyLink} */
                       className={ModalStyles.buttonLink}>
                       <FaLink style={{ paddingTop: '2px' }} />
                       &nbsp;
