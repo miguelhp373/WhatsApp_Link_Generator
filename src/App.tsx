@@ -152,7 +152,7 @@ function App() {
           <div className={container_left.container_footer}>
             <div className={container_left.content}>
               <div className={container_left.links_footer}>
-                <a href="https://github.com/miguelhp373/WhatsApp_Link_Generator" target="_blank">
+                <a href="https://github.com/miguelhp373/WhatsApp_Link_Generator" target="blank">
                   <span>
                     <FaGithub />
                   &nbsp;
@@ -160,7 +160,7 @@ function App() {
                 </span>
                 </a>
                 <br />
-                <a href="https://www.linkedin.com/in/miguel-henrique-pereira-b466921b0/" target="_blank">
+                <a href="https://www.linkedin.com/in/miguel-henrique-pereira-b466921b0/" target="blank">
                   <span>
                     <FaLinkedin />
                   &nbsp;
