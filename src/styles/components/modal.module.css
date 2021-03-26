@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    color: #636e72;
+    color: #2ecc71;
 }
 
 .buttonClose{
@@ -20,6 +20,7 @@
 
 .buttonClose:hover{
     filter: brightness(80%);
+    cursor: pointer;
 }
 
 .container{
@@ -60,4 +61,24 @@
 
 .buttonLink:hover{
     filter: brightness(90%);
+    cursor: pointer;
+}
+
+
+.contentModal>ol:first-child{
+    margin-top: 0px !important;
+}
+
+.contentModal>ol>li{
+    margin-top: 5px;
+    font-size: 1.25rem;
+}
+
+.titleHelp{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: #2ecc71;
+    margin-top: -10px;
 }

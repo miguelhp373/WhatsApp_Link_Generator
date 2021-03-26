@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import { FaTimes, FaLink } from 'react-icons/fa'
+import { FaTimes, FaLink, FaGithub, FaLinkedin } from 'react-icons/fa'
 
 import global from '../src/styles/global.module.css';
 import container_left from '../src/styles/container-left/container.module.css';
@@ -44,7 +44,8 @@ function App() {
   }
 
 
-  const [modalIsOpen, setOpenModal] = useState(false);
+  const [modal1IsOpen, setOpenModal1] = useState(false);
+  const [modal2IsOpen, setOpenModal2] = useState(false);
   const [values, setValues] = useState({ FieldInitialValues })
   const [link, setLink] = useState('')
   const [copy, setCopy] = useState(false)
@@ -65,27 +66,31 @@ function App() {
     let codField = (document.getElementById('codNumber') as HTMLInputElement)
     let phoneField = (document.getElementById('phoneNumber') as HTMLInputElement)
     let messageField = (document.getElementById('messageField') as HTMLInputElement)
-    
-    
-    
 
-    if((codField.value === '')||(phoneField.value === '')||(messageField.value === '')){
-     alert('Preencha Todos Campos Para Prosseguir!')
-    }else{
+
+
+
+    if ((codField.value.trim() === '') || (phoneField.value.trim() === '') || (messageField.value.trim() === '') ||
+      (codField.value.length < 2) || (phoneField.value.length < 9)) {
+      alert('Preencha Todos Campos Para Prosseguir!')
+      codField.focus()
+    }
+    else {
       let codNumber = localStorage.getItem('codNumber')
       let phoneNumber = localStorage.getItem('phoneNumber')
       let message = localStorage.getItem('messageField')
       let LinkApi = 'web.whatsapp.com/send?phone=';
       let LinkGerated = `${LinkApi}55${codNumber}${phoneNumber}&text=${message}&app_absent=0`;
       localStorage.setItem('link', LinkGerated)
-      setOpenModal(true)
+      setOpenModal1(true)
       setLink(LinkGerated)
+      document.title = 'Link | WhatsApp Link Generator'
     }
 
 
   }
 
-  function ClearFields(){
+  function ClearFields() {
     let cod = (document.getElementById('codNumber') as HTMLInputElement)
     let phone = (document.getElementById('phoneNumber') as HTMLInputElement)
     let message = (document.getElementById('messageField') as HTMLInputElement)
@@ -102,9 +107,21 @@ function App() {
   }
 
 
-  function CloseModal() {
-    setOpenModal(false)
+  function CloseModal1() {
+    setOpenModal1(false)
     setCopy(false)
+    document.title = 'Home | WhatsApp Link Generator'
+  }
+
+
+  function helpButton() {
+    setOpenModal2(true)
+    document.title = 'Ajuda | WhatsApp Link Generator'
+  }
+
+  function CloseModal2() {
+    setOpenModal2(false)
+    document.title = 'Home | WhatsApp Link Generator'
   }
 
 
@@ -123,20 +140,66 @@ function App() {
         <div className={container_left.text_welcome}>
           <div className={container_left.content}>
             <h1>Bem Vindo</h1>
-            <p>Gere Um Link Para o Seu <br />
-              WhatsApp, Inserindo o Numero e <br />
-              A Mensagem que pessoa enviará <br />
-              sempre que utilizar seu link.
+            <p>
+              Gere Um Link Para o WhatsApp. Ótima Ferramenta para ações de Marketing e
+              Relacionamento. Com o Link gerado você poderá utilizá-lo
+              de diversas formas:campanhas, redes sociais, email marketing, banners e etc.
             </p>
           </div>
         </div>
 
         <footer>
-          <span>&copy;miguelhp - 2021</span>
+          <div className={container_left.container_footer}>
+            <div className={container_left.content}>
+              <div className={container_left.links_footer}>
+                <a href="https://github.com/miguelhp373/WhatsApp_Link_Generator">
+                  <span>
+                    <FaGithub />
+                  &nbsp;
+                  GitHub
+                </span>
+                </a>
+                <br />
+                <a href="https://www.linkedin.com/in/miguel-henrique-pereira-b466921b0/">
+                  <span>
+                    <FaLinkedin />
+                  &nbsp;
+                  Linkedin
+                </span>
+                </a>
+              </div>
+              <br />
+              <span>&copy;miguelhp - 2021</span>
+            </div>
+          </div>
         </footer>
 
       </div>
       <div className={container_right.right_main_container}>
+        <div className={container_right.help}>
+          <button onClick={helpButton}>Ajuda</button>
+        </div>
+        <Modal
+          isOpen={modal2IsOpen}
+          onRequestClose={() =>
+            setOpenModal2(false)
+          }
+          style={ModalStyle}
+        >
+          <button onClick={CloseModal2} className={ModalStyles.buttonClose}><FaTimes /></button>
+          <h1 className={ModalStyles.titleHelp}>Como Funciona</h1>
+          <div className={ModalStyles.container}>
+            <div className={ModalStyles.contentModal}>
+              <ol>
+                <li>Insira o nº do WhatsApp Ex: 11 9 9999-9999</li>
+                <li>Escreva a mensagem padrão que será exibida</li>
+                <li>Clique em “GERAR LINK”</li>
+                <li>Copie o link e compartilhe</li>
+                <li>Antes de usar, faça o teste</li>
+              </ol>
+            </div>
+          </div>
+        </Modal>
 
         <div className={container_right.title}>
           <h1>Insira as Informações</h1>
@@ -170,13 +233,13 @@ function App() {
 
 
                 <Modal
-                  isOpen={modalIsOpen}
+                  isOpen={modal1IsOpen}
                   onRequestClose={() =>
-                    setOpenModal(false)
+                    setOpenModal1(false)
                   }
                   style={ModalStyle}
                 >
-                  <button onClick={CloseModal} className={ModalStyles.buttonClose}><FaTimes /></button>
+                  <button onClick={CloseModal1} className={ModalStyles.buttonClose}><FaTimes /></button>
                   <h1 className={ModalStyles.title}>Link Gerado</h1>
                   <div className={ModalStyles.container}>
                     <div className={ModalStyles.contentModal}>
@@ -201,8 +264,10 @@ function App() {
 
               </div>
             </div>
-
-
+            <br />
+            <div className={container_right.warning}>
+              <span>Não guardamos nenhum dado informado.</span>
+            </div>
           </div>
         </div>
       </div>
