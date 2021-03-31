@@ -17,7 +17,8 @@ function App() {
 
   const ModalStyle = {
     overlay: {
-      background: '#FFFF'
+      background: '#FFFF',
+      transition:'2s'
     },
     content: {
       background: '#dfe6ed',
@@ -26,7 +27,7 @@ function App() {
       top: '15%',
       left: '25%',
       align: 'center',
-      borderRadius: '5px'
+      borderRadius: '5px',
     },
     contentModal: {
       display: 'flex',
