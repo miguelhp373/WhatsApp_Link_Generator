@@ -5,7 +5,7 @@ import { FaTimes, FaLink, FaGithub, FaLinkedin } from 'react-icons/fa'
 import global from '../src/styles/global.module.css';
 import container_left from '../src/styles/container-left/container.module.css';
 import container_right from '../src/styles/container-right/container.module.css';
-import ModalStyles from '../src/styles/components/modal.module.css'
+import ModalStyles from '../src/styles/components/modal.module.css';
 
 
 Modal.setAppElement('#root')
@@ -14,7 +14,7 @@ Modal.setAppElement('#root')
 function App() {
 
 
-
+//modal styles
   const ModalStyle = {
     overlay: {
       background: '#FFFF',
@@ -38,45 +38,65 @@ function App() {
 
 
 
+
+//hooks states
+  const [modal1IsOpen, setOpenModal1] = useState(false);
+  const [modal2IsOpen, setOpenModal2] = useState(false);
+  const [link, setLink] = useState('')
+  const [copy, setCopy] = useState(false)
+  
+//old code, onchange inputs, store values, substituted for function button create link
+
+
+/* 
   const FieldInitialValues = {
     codNumber: '',
     phoneNumber: '',
     messageField: ''
-  }
+  } */
 
+/*   const [values, setValues] = useState({ FieldInitialValues }) */
 
-  const [modal1IsOpen, setOpenModal1] = useState(false);
-  const [modal2IsOpen, setOpenModal2] = useState(false);
-  const [values, setValues] = useState({ FieldInitialValues })
-  const [link, setLink] = useState('')
-  const [copy, setCopy] = useState(false)
-
-
+/* 
   function getValueToField(ev: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) {
-    const { id, value } = ev.currentTarget
 
-    localStorage.setItem(id, value)
+    if((!localStorage.getItem('codNumber')) || (!localStorage.getItem('phoneNumber')) || ((!localStorage.getItem('messageField')))){
+      const { id, value } = ev.currentTarget
 
-    setValues({
-      ...values,
-      [id]: value
-    })
-  }
+      localStorage.setItem(id, value)
+  
+      setValues({
+        ...values,
+        [id]: value
+      })
+    }
+  } */
 
+
+
+//create link whatsapp
   function LinkCreate() {
+    //get inputs
     let codField = (document.getElementById('codNumber') as HTMLInputElement)
     let phoneField = (document.getElementById('phoneNumber') as HTMLInputElement)
     let messageField = (document.getElementById('messageField') as HTMLInputElement)
 
 
 
-
+    //verified inputs if null
     if ((codField.value.trim() === '') || (phoneField.value.trim() === '') || (messageField.value.trim() === '') ||
       (codField.value.length < 2) || (phoneField.value.length < 9)) {
       alert('Preencha Todos Campos Para Prosseguir!')
       codField.focus()
     }
-    else {
+    else {//otherwise, the values are stored in local storage
+      if((!localStorage.getItem('codNumber')) || (!localStorage.getItem('phoneNumber')) || ((!localStorage.getItem('messageField')))){
+        localStorage.setItem('codNumber',codField.value)
+        localStorage.setItem('phoneNumber',phoneField.value)
+        localStorage.setItem('messageField',messageField.value)
+  
+      }
+      //get values from localstorage items, and generated one link to whatsapp
       let codNumber = localStorage.getItem('codNumber')
       let phoneNumber = localStorage.getItem('phoneNumber')
       let message = localStorage.getItem('messageField')
@@ -91,6 +111,7 @@ function App() {
 
   }
 
+  //clear inputs
   function ClearFields() {
     let cod = (document.getElementById('codNumber') as HTMLInputElement)
     let phone = (document.getElementById('phoneNumber') as HTMLInputElement)
@@ -98,28 +119,30 @@ function App() {
     cod.value = ''
     phone.value = ''
     message.value = ''
+    localStorage.clear();
+    cod.focus()
   }
 
-
+  //copy link to Clipboard
   function CopyLink() {
     (document.getElementById('linkCopy') as HTMLInputElement).select();
     document.execCommand('copy')
     setCopy(true)
   }
 
-
+  //close modal from button close
   function CloseModal1() {
     setOpenModal1(false)
     setCopy(false)
     document.title = 'Home | WhatsApp Link Generator'
   }
 
-
+  //open modal from button help
   function helpButton() {
     setOpenModal2(true)
     document.title = 'Ajuda | WhatsApp Link Generator'
   }
-
+//close modal from button close
   function CloseModal2() {
     setOpenModal2(false)
     document.title = 'Home | WhatsApp Link Generator'
@@ -144,7 +167,7 @@ function App() {
             <p>
               Gere Um Link Para o WhatsApp. Ótima Ferramenta para ações de Marketing e
               Relacionamento. Com o Link gerado você poderá utilizá-lo
-              de diversas formas:campanhas, redes sociais, email marketing, banners e etc.
+              de diversas formas: campanhas, redes sociais, email marketing, banners e etc.
             </p>
           </div>
         </div>
@@ -211,17 +234,17 @@ function App() {
 
             <div className={container_right.field_number_phone}>
               <input type="text" name="ddd" id="codNumber" className={container_right.field_ddd} placeholder='DDD' maxLength={2}
-                onChange={getValueToField}
+                /* onChange={getValueToField} */
                 required
               />
               <input type="text" name="number-phone" id="phoneNumber" className={container_right.field_phone} placeholder='NÚMERO' maxLength={9}
-                onChange={getValueToField}
+                /* onChange={getValueToField} */
                 required
               />
             </div>
 
             <div className={container_right.field_text_area}>
-              <textarea id='messageField' className={container_right.message_field} placeholder='Mensagem' onChange={getValueToField} required />
+              <textarea id='messageField' className={container_right.message_field} placeholder='Mensagem' /* onChange={getValueToField} */ required />
             </div>
 
             <br />

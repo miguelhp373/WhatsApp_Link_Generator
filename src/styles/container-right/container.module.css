@@ -41,9 +41,12 @@
     border: 3px solid #b2bec3;
     border-radius: 5px;
     padding-left: 5px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    transition: 0.2s;
 }
 
 .field_number_phone>.field_ddd:focus{
+    border: 3px solid #818c91;
     outline: 0;
 }
 
@@ -55,9 +58,12 @@
     padding-left: 5px;
     border: 3px solid #b2bec3;
     border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    transition: 0.2s;
 }
 
 .field_number_phone>.field_phone:focus{
+    border: 3px solid #818c91;
     outline: 0;
 }
 .field_text_area{
@@ -79,10 +85,12 @@
     min-height: 200px;
     max-height: 200px;
     margin-left: 5px;
-
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    transition: 0.2s;
 }
 
 .message_field:focus{
+    border: 3px solid #818c91;
     outline: 0;
 }
 
