@@ -134,6 +134,7 @@ function App() {
   function CloseModal1() {
     setOpenModal1(false)
     setCopy(false)
+    localStorage.clear();
     document.title = 'Home | WhatsApp Link Generator'
   }
 
