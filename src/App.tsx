@@ -44,35 +44,20 @@ function App() {
   const [modal2IsOpen, setOpenModal2] = useState(false);
   const [link, setLink] = useState('')
   const [copy, setCopy] = useState(false)
+
+
+  //clear inputs
+  function ClearFields() {
+    let cod = (document.getElementById('codNumber') as HTMLInputElement)
+    let phone = (document.getElementById('phoneNumber') as HTMLInputElement)
+    let message = (document.getElementById('messageField') as HTMLInputElement)
+    cod.value = ''
+    phone.value = ''
+    message.value = ''
+    localStorage.clear();
+    cod.focus()
+  }
   
-//old code, onchange inputs, store values, substituted for function button create link
-
-
-/* 
-  const FieldInitialValues = {
-    codNumber: '',
-    phoneNumber: '',
-    messageField: ''
-  } */
-
-/*   const [values, setValues] = useState({ FieldInitialValues }) */
-
-/* 
-  function getValueToField(ev: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) {
-
-    if((!localStorage.getItem('codNumber')) || (!localStorage.getItem('phoneNumber')) || ((!localStorage.getItem('messageField')))){
-      const { id, value } = ev.currentTarget
-
-      localStorage.setItem(id, value)
-  
-      setValues({
-        ...values,
-        [id]: value
-      })
-    }
-  } */
-
-
 
 //create link whatsapp
   function LinkCreate() {
@@ -111,17 +96,7 @@ function App() {
 
   }
 
-  //clear inputs
-  function ClearFields() {
-    let cod = (document.getElementById('codNumber') as HTMLInputElement)
-    let phone = (document.getElementById('phoneNumber') as HTMLInputElement)
-    let message = (document.getElementById('messageField') as HTMLInputElement)
-    cod.value = ''
-    phone.value = ''
-    message.value = ''
-    localStorage.clear();
-    cod.focus()
-  }
+
 
   //copy link to Clipboard
   function CopyLink() {
@@ -134,7 +109,7 @@ function App() {
   function CloseModal1() {
     setOpenModal1(false)
     setCopy(false)
-    localStorage.clear();
+    ClearFields()
     document.title = 'Home | WhatsApp Link Generator'
   }
 
